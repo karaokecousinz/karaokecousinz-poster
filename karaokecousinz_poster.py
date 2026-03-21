@@ -52,7 +52,7 @@ HTML = """
   .btn { width:100%; padding:14px; background:var(--gold); color:var(--dark); font-family:'DM Sans',sans-serif; font-size:15px; font-weight:500; border:none; border-radius:10px; cursor:pointer; margin-top:1.5rem; transition:opacity 0.2s; }
   .btn:hover { opacity:0.88; }
   .btn:disabled { opacity:0.5; cursor:not-allowed; }
-  .btn-fetch { width:100%; padding:10px; background:transparent; color:var(--gold); font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; border:0.5px solid var(--gold); border-radius:10px; cursor:pointer; margin-top:0.5rem; transition:all 0.2s; }
+  .btn-fetch { width:100%; padding:14px; background:transparent; color:var(--gold); font-family:'DM Sans',sans-serif; font-size:14px; font-weight:500; border:0.5px solid var(--gold); border-radius:10px; cursor:pointer; margin-top:0.8rem; transition:all 0.2s; -webkit-tap-highlight-color:rgba(201,168,76,0.2); touch-action:manipulation; }
   .btn-fetch:hover { background:rgba(201,168,76,0.1); }
   .status { font-size:13px; text-align:center; margin:8px 0; min-height:20px; }
   .status.loading { color:var(--muted); }
@@ -91,7 +91,7 @@ HTML = """
     <div class="form-group full">
       <label>YouTube Link</label>
       <input type="text" id="yt_link" placeholder="https://youtu.be/..." />
-      <button class="btn-fetch" onclick="fetchAndExtract()">Auto-fetch & Extract All Details</button>
+      <button class="btn-fetch" onclick="fetchAndExtract()" ontouchstart="">Auto-fetch & Extract All Details</button>
       <div class="status" id="fetch_status"></div>
     </div>
 
@@ -130,7 +130,7 @@ HTML = """
           <textarea id="special_note" placeholder="e.g. Viewer request from Malaysia..."></textarea>
         </div>
       </div>
-      <button class="btn" id="generateBtn" onclick="generatePosts()">Generate Posts for All Platforms</button>
+      <button class="btn" id="generateBtn" onclick="generatePosts()" ontouchstart="">Generate Posts for All Platforms</button>
     </div>
 
   </div>
