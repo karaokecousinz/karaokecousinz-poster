@@ -3,26 +3,20 @@ import json
 import re
 import urllib.request
 import os
+import google.generativeai as genai
 
 app = Flask(__name__)
 
 YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", "AIzaSyCOWy4Qlfw7Kzj08akPy1UsheTSvAgXXXA")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyC2SZjrMhwHTP0MeofzT8MK7GMyXLBXly0")
 
+genai.configure(api_key=GEMINI_API_KEY)
+
 def gemini(prompt):
-    body = json.dumps({
-        "contents": [{"parts": [{"text": prompt}]}]
-    }).encode()
-    req = urllib.request.Request(
-        "https://generativelanguage.googleapis.com/v1beta/models/"
-        "gemini-2.5-flash:generateContent?key=" + GEMINI_API_KEY,
-        data=body,
-        headers={"Content-Type": "application/json"},
-        method="POST"
-    )
-    with urllib.request.urlopen(req) as resp:
-        result = json.loads(resp.read().decode())
-    return result["candidates"][0]["content"]["parts"][0]["text"]
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    response = model.generate_content(prompt)
+    return response.text
+
 
 HTML = """
 <!DOCTYPE html>
