@@ -401,5 +401,27 @@ Return ONLY a raw JSON object, no markdown, no code blocks, no extra text:
     except Exception as e:
         return jsonify({'error': str(e)})
 
+# replaced
+
+
+def keep_alive():
+    import threading
+    import time
+    def ping():
+        while True:
+            time.sleep(600)
+            try:
+                url = os.environ.get("RENDER_EXTERNAL_URL", "https://karaokecousinz-poster.onrender.com")
+                urllib.request.urlopen(f"{url}/ping")
+            except:
+                pass
+    t = threading.Thread(target=ping, daemon=True)
+    t.start()
+
+@app.route('/ping')
+def ping():
+    return 'ok', 200
+
 if __name__ == '__main__':
-    app.run(debug=False, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    keep_alive()
+    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
